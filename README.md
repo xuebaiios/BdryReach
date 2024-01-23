@@ -180,7 +180,7 @@ plt::show();
 ### 2.2.6 Results Display
 **Results are displayed by comparing the upper reachable set approximations obtained using BdryReach and CORA. The blue portion represents the results calculated by BdryReach, while the red portion is calculated by CORA. It is evident that BdryReach achieves higher accuracy in upper reachable set approximation compared to CORA.**
 <p align="center">
-  <img src=2.2.6.png>
+  <img src=result_picture/2.2.6.png>
 </p>
 
 ## 2.3 Approximate Computation of Reachable Sets Use Case
@@ -273,7 +273,7 @@ plt::show();
 
 **We compute the under-approximation of the VanderPol model starting from the initial region ([1.23, 1.57], [2.34, 2.46]) with a step size of 0.1s and a time interval of 0-0.8s. The green area represents the under-approximation of the reachable set, while the blue area represents the over-approximation for comparison, showing the precision of the under-approximation calculation.**
 <p align="center">
-  <img src=2.3.6.png>
+  <img src=result_picture/2.3.6.png>
 </p>
 
 ## 3 Reproducing Results
