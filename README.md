@@ -128,7 +128,7 @@ IMap f(_f, dimIn, dimOut, noParam, MaxDerivativeOrder); // Constructing IMap for
 
 ```
 ### 2.2.3 Set Reachable Set Parameters
-**Here, we adopt the parameter definitions similar to the MATLAB Reachable Set Computation Toolbox (CORA). For the specific meanings of each parameter, please refer to the documentation provided by CORA.**
+**Here, we adopt the parameter definitions similar to the MATLAB Reachable Set Computation Toolbox (CORA). For the specific meanings of each parameter, [please refer to the manual of CORA.](result_picture/Cora2021Manual.pdf)**
 ```cpp
     NonlinearSys<double> mysys(f, 2, 0, 2);
     ReachOptions<double> options;
@@ -294,13 +294,3 @@ make
 ./examples/overVanderPol
 ./examples/over2Rrobot
 ```
-## 4 Frequently Asked Questions and Troubleshooting
-### Slow Execution
-* **For reachable set over-approximation, check if a large initial region or time interval is set. Larger initial regions or time intervals lead to longer computation times. It is recommended to reduce the initial region size or decrease the computation time interval.**
-* **For reachable set under-approximation, check if a small radius is set (maximum allowed generator length for boundary segmentation). A smaller radius in high-dimensional differential equations can significantly increase the number of boundaries, leading to longer computation times. It is advisable to increase the radius.**
-### Unsuccessful Reachable Set Over-Approximation
-* **Check if a large initial region or a long time interval is set. Large initial regions or long time intervals may cause the "wrapping effect" in reachable set over-approximation, where the computed over-approximation quickly expands. It is recommended to reduce the initial region size or decrease the computation time interval.**
-### Unsuccessful Reachable Set Under-Approximation
-* **Check if a small initial region or a long time interval is set. A small initial region may result in an empty under-approximation. Moreover, a long time interval may cause the under-approximation to become smaller over time, eventually leading to an empty set.**
- ## 5 Acknowledgments
-* **This tool is inspired by the algorithms for reachable set over-approximation in the MATLAB Reachability Analysis Toolbox CORA. We also utilized methods from the Capd library for interval-based derivatives and interval calculations in the system.**
