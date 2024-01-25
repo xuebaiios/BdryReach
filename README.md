@@ -11,7 +11,7 @@
 </div>
 
 ## 1. Tool Installation
-**All experiments are conducted on a virtual machine system with an Intel® Core™ i7-10750H CPU @ 2.60GHz × 8 and 5.8 GiB of memory, running Ubuntu 20.04.3 LTS. We recommend a similar hardware setup and a Linux environment. The installation requires the cmake tool and various third-party libraries needed for BdryReach.**
+All experiments are conducted on a virtual machine system with an **Intel® Core™ i7-10750H CPU @ 2.60GHz × 8 and 5.8 GiB of memory, running Ubuntu 20.04.3 LTS**. We recommend a similar hardware setup and a Linux environment. The installation requires the **cmake** tool and various third-party libraries needed for BdryReach.
 
 ### 1.1 Required Third-Party Libraries
 
@@ -46,7 +46,7 @@ cd capd_nogui
 make
 sudo make install
 ```
-### 1.3 BdryReach Toolkit Download and Test Case Compilation
+### 1.3 BdryReach Toolkit Installation and Compilation of Test Cases
 ```bash
 git clone https://gitee.com/ren-dejin/BdryReach.git
 cd BdryReach/
@@ -57,19 +57,19 @@ make
 ```
 ## 2. Usage
 
-### 2.1 Reachable Set Approximation Interface
-### 2.1.1   Reachable Set Upper Approximation Interface
+### 2.1 Outer-approximation and Inner-approximation Computation Interface of Reachable Set 
+### 2.1.1  outer-approximation Computation Interface of Reachable Set
 ```cpp
 template <typename Number>
 static vector<ReachableSet<Number>> BdReach(NonlinearSys<Number> mysys, ReachOptions<Number> options, Zonotope<Number> R0)
 ```
 **Parameters:**
 * **mysys:** Differential equation for computing reachable sets.
-* **options:** Configuration for upper reachable set approximation.
+* **options:** Configuration for Outer-approximation of Reachable Set Computation.
 * **R0:** Initial set.
 
 
-### 2.1.2 Reachable Set Lower Approximation Interface
+### 2.1.2 Inner-approximation Computation Interface of Reachable Set
 ```cpp
 template <typename Number>
         static vector<Zonotope<Number>> underReachClp(NonlinearSys<Number> mysys, 			
@@ -78,23 +78,23 @@ template <typename Number>
 ```
 **Parameters:**
 * **mysys:** Differential equation for computing reachable sets.
-* **mysysBack:** Reverse differential equation for result verification.
-* **options:** Configuration for the lower reachable set approximation part of the program.
+* **mysysBack:** Reverse Differential Equations for Result Verification.
+* **options:** Relevant Configuration for Outer-approximation of Reachable Set Computation in the Program.
 * **R0:** Initial set.
-* **overRtime:** Step size for each step of the lower reachable set approximation.
-* **steps:** Iteration count for the lower reachable set approximation.
-* **radius:** Maximum generator length allowed for boundary segmentation.
-* **over_step:** Step size for computing the entire reachable set approximation in each step of the lower reachable set approximation.
-* **bound_step:** Step size for computing the boundary reachable set approximation in each step of the lower reachable set approximation.
-* **Zover_order:** Limit on the zonotope order for computing the entire reachable set approximation in each step of the lower reachable set approximation.
-### 2.2 Reachable Set Upper Approximation Example
-**As an example, we calculate the upper reachable set approximation for the VanderPol model. The file computes the reachable set approximation from the initial region ([1.23,1.57],[2.34,2.46]) for the time interval 0-6.74s. The specific file location is:**
+* **overRtime:** Step Size for Reachable Set Inner-approximation Computation at Each Step.
+* **steps:** Number of Iterations for Reachable Set Inner-approximation Computation.
+* **radius:** Maximum Allowed Generator Length for Boundary Segmentation.
+* **over_step:** Step size for computing the outer-approximation of the reachable set for the entire set at each step in reachable set inner-approximation Computation.
+* **bound_step:** Step size for computing the outer-approximation of the reachable set for the boundary of the set at each step in reachable set inner-approximation Computation.
+* **Zover_order:** Limit on the zonotope order for computing the outer-approximation of the reachable set for the entire set at each step in reachable set inner-approximation Computation.
+### 2.2 Use Case for Reachable Set Outer-approximation Computation
+**As an example, we perform the computation of the outer-approximation of the reachable set for the VanderPol model. The file computes the outer-approximation from the initial region ([1.23, 1.57], [2.34, 2.46]) over the time interval 0 - 6.74 seconds.The specific file location is:**
 ```RobotFramework
 /examples/overVanderPol.cpp.
 ```
 ### 2.2.1 Include Files
 ```cpp
-#include <overApprox/overApprox.h> // Header file containing interfaces for computing reachable set over-approximation
+#include <overApprox/overApprox.h> // Header File with Interfaces for Computing Reachable Set Outer-approximation.
 #include <plotter/matplotlibcpp.h> // Header file for Matplotlib C++ plotting library
 #include <plotter/plotter.h> // Header file for result plotting
 ```
@@ -123,12 +123,12 @@ int noParam = 0;
 int MaxDerivativeOrder = 3; // The maximum order to which the differential equation is expanded using Taylor series.
 
 // Creating IMap for interval computations
-IMap f(_f, dimIn, dimOut, noParam, MaxDerivativeOrder); // Constructing IMap for interval calculations
+IMap f(_f, dimIn, dimOut, noParam, MaxDerivativeOrder); // Constructing IMap for interval Computations
 
 
 ```
-### 2.2.3 Set Reachable Set Parameters
-**Here, we adopt the parameter definitions similar to the MATLAB Reachable Set Computation Toolbox (CORA). For the specific meanings of each parameter, [please refer to the manual of CORA.](result_picture/Cora2021Manual.pdf)**
+### 2.2.3 Parameter Configuration for Computing Reachable Sets.
+**Here, we adopt the same parameter definitions as the MATLAB Reachable Set Computation Toolbox CORA. The specific meanings of each parameter can be found in CORA's documentation. [please refer to the manual of CORA.](result_picture/Cora2021Manual.pdf)**
 ```cpp
     NonlinearSys<double> mysys(f, 2, 0, 2);
     ReachOptions<double> options;
@@ -163,13 +163,13 @@ IMap f(_f, dimIn, dimOut, noParam, MaxDerivativeOrder); // Constructing IMap for
     options.set_usekrylovError(1);
     options.set_max_error(DBL_MAX*Eigen::MatrixXd::Ones(2,1));
 ```
-### 2.2.4 Call Boundary-Based Upper Reachable Set Approximation Method
-**This step involves invoking our boundary-based reachable set approximation method. Please refer to Section 2.1.1 for the meanings of various parameters.**
+### 2.2.4 Invoking Boundary-Based Reachable Set Outer-approximation Computation Method
+**This step invokes our boundary-based method for computing outer-approximation of reachable sets. Please refer to Section 2.1.1 for the meanings of various parameters.**
 ```cpp
 vector<ReachableSet<double>> BdReachset = OverApprox::BdReach(mysys, options, R0_);
 ```
-### 2.2.5 Plot Results
-**For drawing the graphical representation of the results, we utilize the lightweight plotting library Matplotlib for C++. For specific usage instructions,[please refer to Matplotlib for C++ Documentation.](https://matplotlib-cpp.readthedocs.io/en/latest/index.html)**
+### 2.2.5 The plotting of results.
+For plotting the graphical results, we utilized the lightweight plotting library **Matplotlib for C++**." For specific usage instructions,[please refer to Matplotlib for C++ Documentation.](https://matplotlib-cpp.readthedocs.io/en/latest/index.html)
 ```cpp
 plt::figure_size(1200, 780);
 for(int i = 0; i < BdReachset.size(); i++){
@@ -178,23 +178,23 @@ for(int i = 0; i < BdReachset.size(); i++){
 plt::show();
 ```
 ### 2.2.6 Results Display
-**Results are displayed by comparing the upper reachable set approximations obtained using BdryReach and CORA. The blue portion represents the results calculated by BdryReach, while the red portion is calculated by CORA. It is evident that BdryReach achieves higher accuracy in upper reachable set approximation compared to CORA.**
+**We employed both the BdryReach and CORA methods to compute the outer-approximation of the reachable set starting from the initial region ([1.23, 1.57], [2.34, 2.46]) over the time interval 0 to 6.74 seconds. The blue region represents the results obtained by the BdryReach method, while the red region corresponds to the results from CORA Computations. It is evident that the outer-approximation computed by BdryReach exhibits significantly higher accuracy compared to CORA.**
 <p align="center">
   <img src=result_picture/2.2.6.png>
 </p>
 
-## 2.3 Approximate Computation of Reachable Sets Use Case
-**In this section, we illustrate the computation of reachable sets under approximation for the VanderPol model. The file calculates an under-approximation of the reachable set starting from the initial region ([1.23, 1.57], [2.34, 2.46]), with a step size of 0.1s and a time interval of 0-0.8s. The specific file location is /examples/underVanderPol.cpp.**
+## 2.3 Use Case for Reachable Set Inner-approximation Computation.
+**We also take the computation of the inner-approximation of the reachable set for the VanderPol model as an example. The file computes the inner-approximation from the initial region ([1.23, 1.57], [2.34, 2.46]) with a step size of 0.1s over the time interval 0 to 0.8s. The specific file location is /examples/underVanderPol.cpp.**
 ### 2.3.1 Include Files
 
 ```cpp
-#include <plotter/matplotlibcpp.h>   // Header for result visualization
+#include <plotter/matplotlibcpp.h>   // Header for computing reachable set outer-approximation
 #include <plotter/plotter.h>          // Header for result visualization
 #include <underApprox/underApprox.h>  // Header for includes the interface for computing reachable sets under approximation.
 ```
 ### 2.3.2 Differential Equation Definitions
 
-**We use the Capd library to define the form of the differential equations. Refer to the Capd documentation on [differential equation systems](https://capd.sourceforge.net/capdDynSys/docs/html/maps.html). Additionally, a reverse differential equation is defined for validation purposes.**
+**We use the Capd library to define the form of the differential equations. Refer to the Capd documentation on [differential equation systems](https://capd.sourceforge.net/capdDynSys/docs/html/maps.html). Notably, the computation of our method requires validation of the obtained reachable set inner-approximation. Therefore, an additional definition for a reverse differential equation is necessary.**
 
 ```cpp
 double mu = 1.;
@@ -252,9 +252,9 @@ options.set_R0(R0_);
 options.set_usekrylovError(1);
 options.set_max_error(DBL_MAX * Eigen::MatrixXd::Ones(2,1));
 ```
-### 2.3.4 Invocation of Boundary-Based Under-Approximation Calculation Method
+### 2.3.4 Invoking the boundary-based method for computing the outer-approximation of reachable sets
 
-**This step invokes our boundary-based under-approximation calculation method. Refer to section 2.1.2 for parameter meanings.**
+**This step calls our boundary-based method for computing the inner-approximation of reachable sets. Refer to section 2.1.2 for parameter meanings.**
 ```cpp
 vector<Zonotope<double>> underR = UnderApprox::underReachClp(mysys, mysysBack, options, R0_, 0.1, 8, 0.01, 0.05, 0.01, 50);
 ```
@@ -271,14 +271,14 @@ plt::show();
 ```
 ### 2.3.6 Results Presentation
 
-**We compute the under-approximation of the VanderPol model starting from the initial region ([1.23, 1.57], [2.34, 2.46]) with a step size of 0.1s and a time interval of 0-0.8s. The green area represents the under-approximation of the reachable set, while the blue area represents the over-approximation for comparison, showing the precision of the under-approximation calculation.**
+**We computed the inner-approximation of the reachable set for the VanderPol model starting from the initial region ([1.23, 1.57], [2.34, 2.46]) with a step size of 0.1s over the time interval 0 to 0.8s. The green region represents the inner-approximation of the reachable set, while, for comparison, the blue region represents the outer-approximation of the reachable set. It is evident that the inner-approximation computation provides more accurate results.**
 <p align="center">
   <img src=result_picture/2.3.6.png>
 </p>
 
 ## 3 Reproducing Results
 
-**All experiments were conducted on a virtual machine with an Intel® Core™ i7-10750H CPU @ 2.60GHz × 8 and 5.8 GiB of memory, running Ubuntu 20.04.3 LTS. The experiment files are located in the /examples directory. Note that different environments may yield some variations in results. We provide 8 C++ files to reproduce all experiments. To run these experiments, execute the following CMake statements in the /BdaryReach directory.**
+**All experiments were conducted on a virtual machine system with an Intel® Core™ i7-10750H CPU @ 2.60GHz × 8, and 5.8 GiB of memory, running Ubuntu 20.04.3 LTS. The experimental files are located in the /examples directory. Please note that different runtime environments may introduce some variations in the results. We provide 8 C++ files to replicate all experiments. To run these experiments, simply execute the following CMake statement in the /BdaryReach directory.**
 ```bash
 mkdir build
 cd build
