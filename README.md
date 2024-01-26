@@ -11,7 +11,7 @@
 </div>
 
 ## 1. Tool Installation
-All experiments are conducted on a virtual machine system with an **Intel® Core™ i7-10750H CPU @ 2.60GHz × 8 and 5.8 GiB of memory, running Ubuntu 20.04.3 LTS**. We recommend a similar hardware setup and a Linux environment. The installation requires the **cmake** tool and various third-party libraries needed for BdryReach.
+All experiments are conducted on a virtual machine system with an **Intel® Core™ i7-10750H CPU @ 2.60GHz × 8 and 5.8 GiB of memory, running Ubuntu 20.04.3 LTS**. We recommend that the operating environment has similar hardware resources and runs on a **Linux system**. On a Linux system, it is necessary to install the **cmake** tool and the various **third-party libraries** required for BdryReach.
 
 ### 1.1 Required Third-Party Libraries
 
