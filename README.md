@@ -99,7 +99,7 @@ template <typename Number>
 #include <plotter/plotter.h> // Header file for result plotting
 ```
 ### 2.2.2 Define Differential Equation
-**We define the form of differential equations using the Capd library. For detailed information on the differential equation system in Capd, please refer to the [Capd documentation] on differential equation systems.(https://capd.sourceforge.net/capdDynSys/docs/html/maps.html)**
+**We define the form of differential equations using the Capd library. For detailed information on the differential equation system in Capd, please refer to the [Capd documentation](https://capd.sourceforge.net/capdDynSys/docs/html/maps.html) on differential equation systems.**
 
 
 ```cpp
@@ -128,7 +128,7 @@ IMap f(_f, dimIn, dimOut, noParam, MaxDerivativeOrder); // Constructing IMap for
 
 ```
 ### 2.2.3 Parameter Configuration for Computing Reachable Sets
-**Here, we adopt the same parameter definitions as the MATLAB Reachable Set Computation Toolbox CORA. The specific meanings of each parameter can be found in CORA's documentation. please refer to the [manual] of CORA.(result_picture/Cora2021Manual.pdf)**
+**Here, we adopt the same parameter definitions as the MATLAB Reachable Set Computation Toolbox CORA. The specific meanings of each parameter can be found in CORA's documentation. please refer to the [manual](result_picture/Cora2021Manual.pdf) of CORA.**
 ```cpp
     NonlinearSys<double> mysys(f, 2, 0, 2);
     ReachOptions<double> options;
@@ -169,7 +169,7 @@ This step invokes our boundary-based method for computing the outer-approximatio
 vector<ReachableSet<double>> BdReachset = OverApprox::BdReach(mysys, options, R0_);
 ```
 ### 2.2.5 The plotting of results
-For plotting the graphical results, we utilize the lightweight plotting library **Matplotlib for C++**." For specific usage instructions,please refer to [Matplotlib for C++ Documentation].(https://matplotlib-cpp.readthedocs.io/en/latest/index.html)
+For plotting the graphical results, we utilize the lightweight plotting library **Matplotlib for C++**." For specific usage instructions,please refer to [Matplotlib for C++ Documentation](https://matplotlib-cpp.readthedocs.io/en/latest/index.html).
 ```cpp
 plt::figure_size(1200, 780);
 for(int i = 0; i < BdReachset.size(); i++){
@@ -260,7 +260,7 @@ vector<Zonotope<double>> underR = UnderApprox::underReachClp(mysys, mysysBack, o
 ```
 ### 2.3.5 The plotting of results
 
-For plotting the graphical results, we utilize the lightweight plotting library **Matplotlib for C++**." For specific usage instructions,please refer to [Matplotlib for C++ Documentation.](https://matplotlib-cpp.readthedocs.io/en/latest/index.html)
+For plotting the graphical results, we utilize the lightweight plotting library **Matplotlib for C++**." For specific usage instructions,please refer to [Matplotlib for C++ Documentation](https://matplotlib-cpp.readthedocs.io/en/latest/index.html).
 ```cpp
 plt::figure_size(1200, 780);
 for(int i = 1; i < underR.size(); i++){
