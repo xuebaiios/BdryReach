@@ -163,12 +163,12 @@ IMap f(_f, dimIn, dimOut, noParam, MaxDerivativeOrder); // Constructing IMap for
     options.set_usekrylovError(1);
     options.set_max_error(DBL_MAX*Eigen::MatrixXd::Ones(2,1));
 ```
-### 2.2.4 Invoking the boundary-based method for computing the outer-approximations of reachable sets
+### 2.2.4 Invoking the Boundary-based Method for Computing the Outer-approximations of Reachable Sets
 This step invokes our boundary-based method for computing the outer-approximations of reachable sets. Please refer to **Section 2.1.1** for the meanings of various parameters.
 ```cpp
 vector<ReachableSet<double>> BdReachset = OverApprox::BdReach(mysys, options, R0_);
 ```
-### 2.2.5 The plotting of results
+### 2.2.5 The Plotting of Results
 For plotting the graphical results, we utilize the lightweight plotting library **Matplotlib for C++**." For specific usage instructions,please refer to [Matplotlib for C++ Documentation](https://matplotlib-cpp.readthedocs.io/en/latest/index.html).
 ```cpp
 plt::figure_size(1200, 780);
@@ -252,13 +252,13 @@ options.set_R0(R0_);
 options.set_usekrylovError(1);
 options.set_max_error(DBL_MAX * Eigen::MatrixXd::Ones(2,1));
 ```
-### 2.3.4 Invoking the boundary-based method for computing the inner-approximation of reachable sets
+### 2.3.4 Invoking the Boundary-based Method for Computing the Inner-approximations of Reachable Sets
 
 **This step invokes our boundary-based method for computing inner-approximations of reachable sets. Please refer to Section 2.1.1 for the meanings of various parameters.**
 ```cpp
 vector<Zonotope<double>> underR = UnderApprox::underReachClp(mysys, mysysBack, options, R0_, 0.1, 8, 0.01, 0.05, 0.01, 50);
 ```
-### 2.3.5 The plotting of results
+### 2.3.5 The Plotting of Results
 
 For plotting the graphical results, we utilize the lightweight plotting library **Matplotlib for C++**." For specific usage instructions,please refer to [Matplotlib for C++ Documentation](https://matplotlib-cpp.readthedocs.io/en/latest/index.html).
 ```cpp
