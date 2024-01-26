@@ -65,7 +65,7 @@ static vector<ReachableSet<Number>> BdReach(NonlinearSys<Number> mysys, ReachOpt
 ```
 **Parameters:**
 * **mysys:** differential equation for computing reachable sets.
-* **options:** configuration for Outer-approximation of Reachable Set Computation.
+* **options:** configuration for outer-approximation of reachable set computation.
 * **R0:** initial set.
 
 
@@ -78,16 +78,16 @@ template <typename Number>
 ```
 **Parameters:**
 * **mysys:** differential equation for computing reachable sets.
-* **mysysBack:** reverse Differential Equations for Result Verification.
-* **options:** relevant Configuration for Outer-approximation of Reachable Set Computation in the Program.
-* **R0:** Iinitial set.
-* **overRtime:** step Size for Reachable Set Inner-approximation Computation at Each Step.
-* **steps:** number of Iterations for Reachable Set Inner-approximation Computation.
-* **radius:** maximum Allowed Generator Length for Boundary Segmentation.
-* **over_step:** step size for computing the outer-approximation of the reachable set for the entire set at each step in reachable set inner-approximation Computation.
-* **bound_step:** step size for computing the outer-approximation of the reachable set for the boundary of the set at each step in outer-approximation of reachable set Computation.
-* **Zover_order:** limit on the zonotope order for computing the outer-approximation of the reachable set for the entire set at each step in outer-approximation of reachable set Computation.
-### 2.2 Test Case for outer-approximation of reachable set Computation
+* **mysysBack:** reverse differential equations for result verification.
+* **options:** relevant configuration for outer-approximation of reachable set computation in the program.
+* **R0:** initial set.
+* **overRtime:** step size for inner-approximation of reachable set computation at each step.
+* **steps:** number of iterations for inner-approximation of reachable set computation.
+* **radius:** maximum allowed generator length for boundary segmentation.
+* **over_step:** step size for outer-approximation of reachable set computation for the entire set at each step in inner-approximation of reachable set computation.
+* **bound_step:** step size for outer-approximation of reachable Set computation for the boundary of the set at each step in inner-approximation of reachable set computation.
+* **Zover_order:** limit on the zonotope order for outer-approximation of reachable set computation for the entire set at each step in inner-approximation of reachable set computation.
+### 2.2 Test Case for Outer-approximation of Reachable Set Computation
 **As an example, we perform the outer-approximation of the reachable set computation for the VanderPol model. The file computes the outer-approximation from the initial region ([1.23, 1.57], [2.34, 2.46]) over the time interval 0 - 6.74 seconds.The specific file location is:**
 ```RobotFramework
 /examples/overVanderPol.cpp.
@@ -127,7 +127,7 @@ IMap f(_f, dimIn, dimOut, noParam, MaxDerivativeOrder); // Constructing IMap for
 
 
 ```
-### 2.2.3 Parameter Configuration for Computing Reachable Sets.
+### 2.2.3 Parameter Configuration for Computing Reachable Sets
 **Here, we adopt the same parameter definitions as the MATLAB Reachable Set Computation Toolbox CORA. The specific meanings of each parameter can be found in CORA's documentation. please refer to the [manual] of CORA.(result_picture/Cora2021Manual.pdf)**
 ```cpp
     NonlinearSys<double> mysys(f, 2, 0, 2);
@@ -164,7 +164,7 @@ IMap f(_f, dimIn, dimOut, noParam, MaxDerivativeOrder); // Constructing IMap for
     options.set_max_error(DBL_MAX*Eigen::MatrixXd::Ones(2,1));
 ```
 ### 2.2.4 Invoking the boundary-based method for computing the outer-approximations of reachable sets
-**This step invokes our boundary-based method for computing outer-approximation of reachable sets. Please refer to Section 2.1.1 for the meanings of various parameters.**
+**This step invokes our boundary-based method for computing the outer-approximations of reachable sets. Please refer to Section 2.1.1 for the meanings of various parameters.**
 ```cpp
 vector<ReachableSet<double>> BdReachset = OverApprox::BdReach(mysys, options, R0_);
 ```
@@ -183,7 +183,7 @@ plt::show();
   <img src=result_picture/2.2.6.png>
 </p>
 
-## 2.3 Use Case for Reachable Set Inner-approximation Computation.
+## 2.3 Test Case for Inner-approximation of Reachable Set Computation
 **We also take the inner-approximation of the reachable set computation for the VanderPol model as an example. The file computes the inner-approximation from the initial region ([1.23, 1.57], [2.34, 2.46]) with a step size of 0.1s over the time interval 0 to 0.8s. The specific file location is /examples/underVanderPol.cpp.**
 ### 2.3.1 Include Files
 
@@ -219,7 +219,7 @@ int MaxDerivativeOrder = 3;
 IMap f(_f, dimIn, dimOut, noParam, MaxDerivativeOrder);
 IMap fBack(_fBack, dimIn, dimOut, noParam, MaxDerivativeOrder);
 ```
-### 2.3.3 Parameters for Computing Reachable Sets
+### 2.3.3 Parameter Configuration for Computing Reachable Sets
 
 **We adopt parameter definitions similar to the MATLAB Reachability Analysis Toolbox CORA. For detailed meanings, refer to CORA's documentation.**
 ```cpp
@@ -254,13 +254,13 @@ options.set_max_error(DBL_MAX * Eigen::MatrixXd::Ones(2,1));
 ```
 ### 2.3.4 Invoking the boundary-based method for computing the inner-approximation of reachable sets
 
-**This step invokes our boundary-based method for computing inner-approximation of reachable sets. Please refer to Section 2.1.1 for the meanings of various parameters.**
+**This step invokes our boundary-based method for computing inner-approximations of reachable sets. Please refer to Section 2.1.1 for the meanings of various parameters.**
 ```cpp
 vector<Zonotope<double>> underR = UnderApprox::underReachClp(mysys, mysysBack, options, R0_, 0.1, 8, 0.01, 0.05, 0.01, 50);
 ```
-### 2.3.5 Result Visualization
+### 2.3.5 The plotting of results
 
-**For the visualization of results, we use the lightweight plotting library Matplotlib for C++. [Refer to Matplotlib for C++ documentation.](https://matplotlib-cpp.readthedocs.io/en/latest/index.html)**
+For plotting the graphical results, we utilize the lightweight plotting library **Matplotlib for C++**." For specific usage instructions,[please refer to Matplotlib for C++ Documentation.](https://matplotlib-cpp.readthedocs.io/en/latest/index.html)
 ```cpp
 plt::figure_size(1200, 780);
 for(int i = 1; i < underR.size(); i++){
@@ -269,7 +269,7 @@ for(int i = 1; i < underR.size(); i++){
 Plotter::plotZonotope(R0_, 1, 2, "k");
 plt::show();
 ```
-### 2.3.6 Results Presentation
+### 2.3.6 Results Display
 
 **We computed the inner-approximation of the reachable set for the VanderPol model starting from the initial region ([1.23, 1.57], [2.34, 2.46]) with a step size of 0.1s over the time interval 0 to 0.8s. The green region represents the inner-approximation of the reachable set, while, for comparison, the blue region represents the outer-approximation of the reachable set. It is evident that the inner-approximation computation provides more accurate results.**
 <p align="center">
