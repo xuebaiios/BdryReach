@@ -58,15 +58,15 @@ make
 ## 2. Usage
 
 ### 2.1 Outer-approximation and Inner-approximation Computation Interface of Reachable Set 
-### 2.1.1  outer-approximation Computation Interface of Reachable Set
+### 2.1.1  Outer-approximation of Reachable Set Computation Interface 
 ```cpp
 template <typename Number>
 static vector<ReachableSet<Number>> BdReach(NonlinearSys<Number> mysys, ReachOptions<Number> options, Zonotope<Number> R0)
 ```
 **Parameters:**
-* **mysys:** Differential equation for computing reachable sets.
-* **options:** Configuration for Outer-approximation of Reachable Set Computation.
-* **R0:** Initial set.
+* **mysys:** differential equation for computing reachable sets.
+* **options:** configuration for Outer-approximation of Reachable Set Computation.
+* **R0:** initial set.
 
 
 ### 2.1.2 Inner-approximation Computation Interface of Reachable Set
@@ -77,17 +77,17 @@ template <typename Number>
         overRtime, int steps, double radius, double over_step, double bound_step, int Zover_order)
 ```
 **Parameters:**
-* **mysys:** Differential equation for computing reachable sets.
-* **mysysBack:** Reverse Differential Equations for Result Verification.
-* **options:** Relevant Configuration for Outer-approximation of Reachable Set Computation in the Program.
-* **R0:** Initial set.
-* **overRtime:** Step Size for Reachable Set Inner-approximation Computation at Each Step.
-* **steps:** Number of Iterations for Reachable Set Inner-approximation Computation.
-* **radius:** Maximum Allowed Generator Length for Boundary Segmentation.
-* **over_step:** Step size for computing the outer-approximation of the reachable set for the entire set at each step in reachable set inner-approximation Computation.
-* **bound_step:** Step size for computing the outer-approximation of the reachable set for the boundary of the set at each step in reachable set inner-approximation Computation.
-* **Zover_order:** Limit on the zonotope order for computing the outer-approximation of the reachable set for the entire set at each step in reachable set inner-approximation Computation.
-### 2.2 Use Case for Reachable Set Outer-approximation Computation
+* **mysys:** differential equation for computing reachable sets.
+* **mysysBack:** reverse Differential Equations for Result Verification.
+* **options:** relevant Configuration for Outer-approximation of Reachable Set Computation in the Program.
+* **R0:** Iinitial set.
+* **overRtime:** step Size for Reachable Set Inner-approximation Computation at Each Step.
+* **steps:** number of Iterations for Reachable Set Inner-approximation Computation.
+* **radius:** maximum Allowed Generator Length for Boundary Segmentation.
+* **over_step:** step size for computing the outer-approximation of the reachable set for the entire set at each step in reachable set inner-approximation Computation.
+* **bound_step:** step size for computing the outer-approximation of the reachable set for the boundary of the set at each step in outer-approximation of reachable set Computation.
+* **Zover_order:** limit on the zonotope order for computing the outer-approximation of the reachable set for the entire set at each step in outer-approximation of reachable set Computation.
+### 2.2 Test Case for outer-approximation of reachable set Computation
 **As an example, we perform the computation of the outer-approximation of the reachable set for the VanderPol model. The file computes the outer-approximation from the initial region ([1.23, 1.57], [2.34, 2.46]) over the time interval 0 - 6.74 seconds.The specific file location is:**
 ```RobotFramework
 /examples/overVanderPol.cpp.
@@ -128,7 +128,7 @@ IMap f(_f, dimIn, dimOut, noParam, MaxDerivativeOrder); // Constructing IMap for
 
 ```
 ### 2.2.3 Parameter Configuration for Computing Reachable Sets.
-**Here, we adopt the same parameter definitions as the MATLAB Reachable Set Computation Toolbox CORA. The specific meanings of each parameter can be found in CORA's documentation. [please refer to the manual of CORA.](result_picture/Cora2021Manual.pdf)**
+**Here, we adopt the same parameter definitions as the MATLAB Reachable Set Computation Toolbox CORA. The specific meanings of each parameter can be found in CORA's documentation. please refer to the [manual] of CORA.(result_picture/Cora2021Manual.pdf)**
 ```cpp
     NonlinearSys<double> mysys(f, 2, 0, 2);
     ReachOptions<double> options;
@@ -192,7 +192,7 @@ plt::show();
 #include <plotter/plotter.h>          // Header for result visualization
 #include <underApprox/underApprox.h>  // Header for includes the interface for computing reachable sets under approximation.
 ```
-### 2.3.2 Differential Equation Definitions
+### 2.3.2 Define Differential Equation
 
 **We use the Capd library to define the form of the differential equations. Refer to the Capd documentation on [differential equation systems](https://capd.sourceforge.net/capdDynSys/docs/html/maps.html). Notably, the computation of our method requires validation of the obtained reachable set inner-approximation. Therefore, an additional definition for a reverse differential equation is necessary.**
 
