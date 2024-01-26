@@ -57,7 +57,7 @@ make
 ```
 ## 2. Usage
 
-### 2.1 Outer-approximation and Inner-approximation Computation Interface of Reachable Set 
+### 2.1 Outer-approximation and Inner-approximation of Reachable Set Computation Interface
 ### 2.1.1  Outer-approximation of Reachable Set Computation Interface 
 ```cpp
 template <typename Number>
@@ -69,7 +69,7 @@ static vector<ReachableSet<Number>> BdReach(NonlinearSys<Number> mysys, ReachOpt
 * **R0:** initial set.
 
 
-### 2.1.2 Inner-approximation Computation Interface of Reachable Set
+### 2.1.2 Inner-approximation of Reachable Set Computation Interface 
 ```cpp
 template <typename Number>
         static vector<Zonotope<Number>> underReachClp(NonlinearSys<Number> mysys, 			
@@ -88,7 +88,7 @@ template <typename Number>
 * **bound_step:** step size for computing the outer-approximation of the reachable set for the boundary of the set at each step in outer-approximation of reachable set Computation.
 * **Zover_order:** limit on the zonotope order for computing the outer-approximation of the reachable set for the entire set at each step in outer-approximation of reachable set Computation.
 ### 2.2 Test Case for outer-approximation of reachable set Computation
-**As an example, we perform the computation of the outer-approximation of the reachable set for the VanderPol model. The file computes the outer-approximation from the initial region ([1.23, 1.57], [2.34, 2.46]) over the time interval 0 - 6.74 seconds.The specific file location is:**
+**As an example, we perform the outer-approximation of the reachable set computation for the VanderPol model. The file computes the outer-approximation from the initial region ([1.23, 1.57], [2.34, 2.46]) over the time interval 0 - 6.74 seconds.The specific file location is:**
 ```RobotFramework
 /examples/overVanderPol.cpp.
 ```
@@ -163,13 +163,13 @@ IMap f(_f, dimIn, dimOut, noParam, MaxDerivativeOrder); // Constructing IMap for
     options.set_usekrylovError(1);
     options.set_max_error(DBL_MAX*Eigen::MatrixXd::Ones(2,1));
 ```
-### 2.2.4 Invoking Boundary-Based Reachable Set Outer-approximation Computation Method
+### 2.2.4 Invoking Outer-approximation Computation Method Based on Boundary Analysis
 **This step invokes our boundary-based method for computing outer-approximation of reachable sets. Please refer to Section 2.1.1 for the meanings of various parameters.**
 ```cpp
 vector<ReachableSet<double>> BdReachset = OverApprox::BdReach(mysys, options, R0_);
 ```
-### 2.2.5 The plotting of results.
-For plotting the graphical results, we utilized the lightweight plotting library **Matplotlib for C++**." For specific usage instructions,[please refer to Matplotlib for C++ Documentation.](https://matplotlib-cpp.readthedocs.io/en/latest/index.html)
+### 2.2.5 The plotting of results
+For plotting the graphical results, we utilize the lightweight plotting library **Matplotlib for C++**." For specific usage instructions,[please refer to Matplotlib for C++ Documentation.](https://matplotlib-cpp.readthedocs.io/en/latest/index.html)
 ```cpp
 plt::figure_size(1200, 780);
 for(int i = 0; i < BdReachset.size(); i++){
@@ -178,13 +178,13 @@ for(int i = 0; i < BdReachset.size(); i++){
 plt::show();
 ```
 ### 2.2.6 Results Display
-**We employed both the BdryReach and CORA methods to compute the outer-approximation of the reachable set starting from the initial region ([1.23, 1.57], [2.34, 2.46]) over the time interval 0 to 6.74 seconds. The blue region represents the results obtained by the BdryReach method, while the red region corresponds to the results from CORA Computations. It is evident that the outer-approximation computed by BdryReach exhibits significantly higher accuracy compared to CORA.**
+**We employ both the BdryReach and CORA methods to compute the outer-approximation of the reachable set starting from the initial region ([1.23, 1.57], [2.34, 2.46]) over the time interval 0 to 6.74 seconds. The blue region represents the results obtained by the BdryReach method, while the red region corresponds to the results from CORA Computations. It is evident that the outer-approximation computed by BdryReach exhibits significantly higher accuracy compared to CORA.**
 <p align="center">
   <img src=result_picture/2.2.6.png>
 </p>
 
 ## 2.3 Use Case for Reachable Set Inner-approximation Computation.
-**We also take the computation of the inner-approximation of the reachable set for the VanderPol model as an example. The file computes the inner-approximation from the initial region ([1.23, 1.57], [2.34, 2.46]) with a step size of 0.1s over the time interval 0 to 0.8s. The specific file location is /examples/underVanderPol.cpp.**
+**We also take the inner-approximation of the reachable set computation for the VanderPol model as an example. The file computes the inner-approximation from the initial region ([1.23, 1.57], [2.34, 2.46]) with a step size of 0.1s over the time interval 0 to 0.8s. The specific file location is /examples/underVanderPol.cpp.**
 ### 2.3.1 Include Files
 
 ```cpp
@@ -252,9 +252,9 @@ options.set_R0(R0_);
 options.set_usekrylovError(1);
 options.set_max_error(DBL_MAX * Eigen::MatrixXd::Ones(2,1));
 ```
-### 2.3.4 Invoking the boundary-based method for computing the outer-approximation of reachable sets
+### 2.3.4 Invoking the boundary-based method for the outer-approximation of reachable sets computation Invoking Outer-approximation Computation Method Based on Boundary Analysis
 
-**This step calls our boundary-based method for computing the inner-approximation of reachable sets. Refer to section 2.1.2 for parameter meanings.**
+**This step calls our boundary-based method for the outer-approximation of reachable sets computation. Refer to section 2.1.2 for parameter meanings.**
 ```cpp
 vector<Zonotope<double>> underR = UnderApprox::underReachClp(mysys, mysysBack, options, R0_, 0.1, 8, 0.01, 0.05, 0.01, 50);
 ```
