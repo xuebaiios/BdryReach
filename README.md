@@ -1,6 +1,6 @@
 <div align="center">
   	<h1>
-    	BdryReach System User Guide
+    	BdryReach User Guide
   	</h1>
 	<br />
     <div>
