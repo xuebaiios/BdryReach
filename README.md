@@ -163,7 +163,7 @@ IMap f(_f, dimIn, dimOut, noParam, MaxDerivativeOrder); // Constructing IMap for
     options.set_usekrylovError(1);
     options.set_max_error(DBL_MAX*Eigen::MatrixXd::Ones(2,1));
 ```
-### 2.2.4 Invoking Outer-approximation Computation Method Based on Boundary Analysis
+### 2.2.4 Invoking the boundary-based method for computing the outer-approximations of reachable sets
 **This step invokes our boundary-based method for computing outer-approximation of reachable sets. Please refer to Section 2.1.1 for the meanings of various parameters.**
 ```cpp
 vector<ReachableSet<double>> BdReachset = OverApprox::BdReach(mysys, options, R0_);
@@ -252,9 +252,9 @@ options.set_R0(R0_);
 options.set_usekrylovError(1);
 options.set_max_error(DBL_MAX * Eigen::MatrixXd::Ones(2,1));
 ```
-### 2.3.4 Invoking the boundary-based method for the outer-approximation of reachable sets computation Invoking Outer-approximation Computation Method Based on Boundary Analysis
+### 2.3.4 Invoking the boundary-based method for computing the inner-approximation of reachable sets
 
-**This step calls our boundary-based method for the outer-approximation of reachable sets computation. Refer to section 2.1.2 for parameter meanings.**
+**This step invokes our boundary-based method for computing inner-approximation of reachable sets. Please refer to Section 2.1.1 for the meanings of various parameters.**
 ```cpp
 vector<Zonotope<double>> underR = UnderApprox::underReachClp(mysys, mysysBack, options, R0_, 0.1, 8, 0.01, 0.05, 0.01, 50);
 ```
