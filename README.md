@@ -83,7 +83,7 @@ template <typename Number>
 * **R0:** initial set.
 * **overRtime:** step size for inner-approximation of reachable set computation at each step.
 * **steps:** number of iterations for inner-approximation of reachable set computation.
-* **radius:** maximum allowed generator length for boundary segmentation.
+* **radius:** maximum allowed length of generator for facets.
 * **over_step:** step size for outer-approximation of reachable set computation for the entire set at each step in inner-approximation of reachable set computation.
 * **bound_step:** step size for outer-approximation of reachable Set computation for the boundary of the set at each step in inner-approximation of reachable set computation.
 * **Zover_order:** limit on the zonotope order for outer-approximation of reachable set computation for the entire set at each step in inner-approximation of reachable set computation.
@@ -99,7 +99,7 @@ template <typename Number>
 #include <plotter/plotter.h> // Header file for result plotting
 ```
 ### 2.2.2 Define Differential Equation
-**We define the form of differential equations using the Capd library. For detailed information on the differential equation system in Capd, [please refer to the Capd documentation on differential equation systems.](https://capd.sourceforge.net/capdDynSys/docs/html/maps.html)**
+**We define the form of differential equations using the Capd library. For detailed information on the differential equation system in Capd, please refer to the [Capd documentation] on differential equation systems.(https://capd.sourceforge.net/capdDynSys/docs/html/maps.html)**
 
 
 ```cpp
@@ -164,12 +164,12 @@ IMap f(_f, dimIn, dimOut, noParam, MaxDerivativeOrder); // Constructing IMap for
     options.set_max_error(DBL_MAX*Eigen::MatrixXd::Ones(2,1));
 ```
 ### 2.2.4 Invoking the boundary-based method for computing the outer-approximations of reachable sets
-**This step invokes our boundary-based method for computing the outer-approximations of reachable sets. Please refer to Section 2.1.1 for the meanings of various parameters.**
+This step invokes our boundary-based method for computing the outer-approximations of reachable sets. Please refer to **Section 2.1.1** for the meanings of various parameters.
 ```cpp
 vector<ReachableSet<double>> BdReachset = OverApprox::BdReach(mysys, options, R0_);
 ```
 ### 2.2.5 The plotting of results
-For plotting the graphical results, we utilize the lightweight plotting library **Matplotlib for C++**." For specific usage instructions,[please refer to Matplotlib for C++ Documentation.](https://matplotlib-cpp.readthedocs.io/en/latest/index.html)
+For plotting the graphical results, we utilize the lightweight plotting library **Matplotlib for C++**." For specific usage instructions,please refer to [Matplotlib for C++ Documentation].(https://matplotlib-cpp.readthedocs.io/en/latest/index.html)
 ```cpp
 plt::figure_size(1200, 780);
 for(int i = 0; i < BdReachset.size(); i++){
@@ -260,7 +260,7 @@ vector<Zonotope<double>> underR = UnderApprox::underReachClp(mysys, mysysBack, o
 ```
 ### 2.3.5 The plotting of results
 
-For plotting the graphical results, we utilize the lightweight plotting library **Matplotlib for C++**." For specific usage instructions,[please refer to Matplotlib for C++ Documentation.](https://matplotlib-cpp.readthedocs.io/en/latest/index.html)
+For plotting the graphical results, we utilize the lightweight plotting library **Matplotlib for C++**." For specific usage instructions,please refer to [Matplotlib for C++ Documentation.](https://matplotlib-cpp.readthedocs.io/en/latest/index.html)
 ```cpp
 plt::figure_size(1200, 780);
 for(int i = 1; i < underR.size(); i++){
